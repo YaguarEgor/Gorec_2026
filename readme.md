@@ -1,4 +1,3 @@
-```markdown
 # Горец-2025
 ## Документация Telegram-бота игры «Горец»
 
@@ -91,11 +90,9 @@ FSM регистрации включает:
 
 Команда:
 
-```
 
 /my_qr
 
-```
 
 Игрок получает личный QR-код.
 
@@ -105,11 +102,11 @@ QR используется для подтверждения убийства.
 
 Команда:
 
-```
+
 
 /kill
 
-```
+
 
 FSM сценарий:
 
@@ -125,52 +122,52 @@ FSM сценарий:
 
 Удаление игрока:
 
-```
+ 
 
 /delete_player <user_id или tg_id>
 
-```
+ 
 
 Оживление игрока:
 
-```
+ 
 
 /revive_player <user_id или tg_id>
 
-```
+ 
 
 Получить список Telegram ID:
 
-```
+ 
 
 /all_tg_ids
 
-```
+ 
 
 Показать всех игроков:
 
-```
+ 
 
 /all_players_full
 
-```
+ 
 
 Изменить очки игрока:
 
-```
+ 
 
 /set_score <user_id> <score>
 
-```
+ 
 
 Рейтинги:
 
-```
+ 
 
 /player_rating
 /team_rating
 
-````
+ `
 
 ---
 
@@ -184,9 +181,9 @@ FSM сценарий:
 
 Используется базовый класс:
 
-```python
+ python
 class Base(DeclarativeBase)
-````
+ `
 
 От него наследуются все модели.
 
@@ -206,15 +203,15 @@ class Base(DeclarativeBase)
 
 Сессия передаётся в функции:
 
-```python
+ python
 db: AsyncSession
-```
+ 
 
 После изменения данных нужно делать:
 
-```python
+ python
 await db.commit()
-```
+ 
 
 ---
 
@@ -224,52 +221,52 @@ await db.commit()
 
 Найти пользователя:
 
-```
+ 
 get_user_by_tg_id()
 get_user_by_id()
 get_user_by_qr_text()
-```
+ 
 
 Создать заявку:
 
-```
+ 
 create_user_application()
 update_user_application()
-```
+ 
 
 Модерация:
 
-```
+ 
 approve_user_application()
 reject_user_application()
 get_pending_users()
-```
+ 
 
 QR-коды:
 
-```
+ 
 ensure_user_qr_code()
-```
+ 
 
 Списки пользователей:
 
-```
+ 
 get_all_tg_ids()
 get_all_users_full()
-```
+ 
 
 Очки:
 
-```
+ 
 set_user_score()
-```
+ 
 
 Проверка админов:
 
-```
+ 
 is_admin()
 make_admin()
-```
+ 
 
 ---
 
@@ -277,40 +274,40 @@ make_admin()
 
 Получить живых игроков:
 
-```
+ 
 get_alive_classic_players()
-```
+ 
 
 Назначить цели:
 
-```
+ 
 assign_classic_targets()
-```
+ 
 
 Получить цель игрока:
 
-```
+ 
 get_user_victim()
-```
+ 
 
 Проверка окончания игры:
 
-```
+ 
 count_alive_classic_players()
 get_last_alive_classic_player()
-```
+ 
 
 Получить живого игрока по tg_id:
 
-```
+ 
 get_alive_classic_user_by_tg_id()
-```
+ 
 
 Обработка убийства:
 
-```
+ 
 process_classic_kill()
-```
+ 
 
 ---
 
@@ -318,37 +315,37 @@ process_classic_kill()
 
 Команды:
 
-```
+ 
 create_team()
 get_team_by_name()
 get_team_by_id()
-```
+ 
 
 Игроки команды:
 
-```
+ 
 get_alive_team_players()
 count_alive_team_players()
-```
+ 
 
 Команды:
 
-```
+ 
 get_alive_teams()
 get_team_target()
-```
+ 
 
 Назначение целей:
 
-```
+ 
 assign_team_targets()
-```
+ 
 
 Обработка убийства:
 
-```
+ 
 process_team_kill()
-```
+ 
 
 ---
 
@@ -356,25 +353,25 @@ process_team_kill()
 
 Удаление игрока:
 
-```
+ 
 delete_user_with_rewire()
-```
+ 
 
 Удаляет игрока и **сшивает круг целей** в classic-режиме.
 
 Оживление игрока:
 
-```
+ 
 revive_user_with_rewire()
-```
+ 
 
 Возвращает игрока в игру и **встраивает его обратно в круг**.
 
 Получение текущей цели:
 
-```
+ 
 get_current_target_for_tg_id()
-```
+ 
 
 ---
 
@@ -386,13 +383,13 @@ get_current_target_for_tg_id()
 
 Основные состояния:
 
-```
+ 
 Registration
 Killing
 Access
 PrivateMessage
 RejectApplication
-```
+ 
 
 FSM применяется для:
 
@@ -443,17 +440,17 @@ QR используется как **секретный идентификато
 
 Функции:
 
-```
+ 
 download_telegram_file_bytes()
 build_kill_photo_path()
 save_bytes_to_file()
-```
+ 
 
 Фото сохраняются в папку:
 
-```
+ 
 kill_photos/
-```
+ 
 
 ---
 
@@ -490,9 +487,9 @@ kill_photos/
 
 Установка библиотек:
 
-```bash
+ bash
 pip install -r requirements.txt
-```
+ 
 
 ---
 
@@ -569,9 +566,9 @@ pip install -r requirements.txt
 
 Игроки образуют цикл:
 
-```
+ 
 A → B → C → ... → A
-```
+ 
 
 После убийства:
 
@@ -587,9 +584,9 @@ A → B → C → ... → A
 
 Команды образуют цикл:
 
-```
+ 
 Team A → Team B → Team C → ... → Team A
-```
+ 
 
 Игрок может устранить **любого игрока команды-цели**.
 
@@ -616,24 +613,24 @@ Team A → Team B → Team C → ... → Team A
 
 Установить зависимости:
 
-```bash
+ bash
 pip install -r requirements.txt
-```
+ 
 
 Создать необходимые папки:
 
-```
+ 
 kill_photos
 QR
-```
+ 
 
 Настроить конфиг.
 
 Запустить:
 
-```bash
+ bash
 python main.py
-```
+ 
 
 ---
 
@@ -661,5 +658,5 @@ python main.py
 
 При серьёзных изменениях рекомендуется обновлять документацию.
 
-```
-```
+ 
+ 
